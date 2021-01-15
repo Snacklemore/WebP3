@@ -1,0 +1,31 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="headline">Mitarbeiter-Daten</div>
+<table class="overview">
+   <tr>
+		<th>Name</th>
+		<th>Vorname</th>
+		<th>Akademischer Grad</th>
+		<th>Tätigkeit</th>
+	</tr>
+   @var entry;@
+   @var i;@
+   @for i in context@
+      @entry = context[i];@
+      <tr id="#entry['id_m']#">
+		 <td>#entry[0]#</td>
+         <td>#entry[1]#</td>
+         <td>#entry[2]#</td>
+		 <td>#entry[3]#</td>
+      </tr>
+   @endfor@
+</table>
+<input type="hidden" id="action" name="action" value="mitarbeiter" />
+
+<div>
+	<button class="buttons" id="erfassen_mitarbeiter">Erfassen</button>
+	<button class="buttons" id="bearbeiten_mitarbeiter">Bearbeiten</button>
+	<button class="buttons" id="anzeigen_mitarbeiter">Anzeigen</button>
+	<button class="buttons" id="idDelete">Entfernen</button>
+</div>
+<!-- EOF -->

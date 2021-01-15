@@ -1,0 +1,332 @@
+{
+   "Mitarbeiter": {
+      "Max-ID": "5",
+      "Count": "4",
+      "List": {
+         "2": [
+            "Kuerten",
+            "Henrik",
+            "Hauptschule",
+            "Student",
+            [
+               [
+                  "1",
+                  "storniert"
+               ],
+               [
+                  "2",
+                  "storniert"
+               ],
+               [
+                  "3",
+                  "storniert"
+               ],
+               [
+                  "4",
+                  "angemeldet"
+               ],
+               [
+                  "7",
+                  "erfolgreich beendet"
+               ]
+            ],
+            [
+               "1"
+            ],
+            [
+               "1"
+            ]
+         ],
+         "3": [
+            "Annacker",
+            "Lennard",
+            "Abitur",
+            "Dual Student",
+            [
+               [
+                  "2",
+                  "storniert"
+               ],
+               [
+                  "1",
+                  "storniert"
+               ],
+               [
+                  "3",
+                  "storniert"
+               ]
+            ],
+            [],
+            []
+         ],
+         "4": [
+            "Ackermann",
+            "Kim",
+            "Abitur",
+            "Student",
+            [
+               [
+                  "2",
+                  "storniert"
+               ],
+               [
+                  "1",
+                  "erfolgreich beendet"
+               ],
+               [
+                  "3",
+                  "erfolgreich beendet"
+               ],
+               [
+                  "7",
+                  "erfolgreich beendet"
+               ]
+            ],
+            [
+               "1"
+            ],
+            [
+               "1",
+               "3"
+            ]
+         ],
+         "5": [
+            "Hoffmann",
+            "Hans",
+            "Realschule",
+            "Klemptner",
+            [],
+            [],
+            []
+         ]
+      }
+   },
+   "Weiterbildungen": {
+      "Max-ID": "7",
+      "Count": "6",
+      "Participation_count": "1",
+      "List": {
+         "1": [
+            "C++",
+            "2020-06-30",
+            "2020-12-24",
+            "C++ Anfaenger Kurs",
+            "2000",
+            "20",
+            "1",
+            [
+               "1",
+               "4"
+            ],
+            [
+               [
+                  "2",
+                  "storniert"
+               ],
+               [
+                  "3",
+                  "storniert"
+               ],
+               [
+                  "4",
+                  "erfolgreich beendet"
+               ]
+            ]
+         ],
+         "2": [
+            "Python",
+            "2020-08-10",
+            "2020-12-25",
+            "Python Anfaenger Kurs",
+            "20",
+            "2",
+            "2",
+            [
+               "2",
+               "3"
+            ],
+            [
+               [
+                  "2",
+                  "storniert"
+               ],
+               [
+                  "3",
+                  "storniert"
+               ],
+               [
+                  "4",
+                  "storniert"
+               ]
+            ]
+         ],
+         "3": [
+            "C#",
+            "2020-12-02",
+            "2020-12-17",
+            "C# Sharp Grundkurs",
+            "222",
+            "2",
+            "3",
+            [],
+            [
+               [
+                  "3",
+                  "storniert"
+               ],
+               [
+                  "4",
+                  "erfolgreich beendet"
+               ],
+               [
+                  "2",
+                  "storniert"
+               ]
+            ]
+         ],
+         "4": [
+            "Java",
+            "2021-06-09",
+            "2021-01-22",
+            "Java Einsteigerkurs",
+            "500",
+            "50",
+            "4",
+            [
+               "5",
+               "6"
+            ],
+            [
+               [
+                  "2",
+                  "angemeldet"
+               ]
+            ]
+         ],
+         "6": [
+            "Java script",
+            "2021-01-15",
+            "2021-01-23",
+            "asd",
+            "444",
+            "1",
+            null,
+            [
+               "7",
+               "8",
+               "9"
+            ],
+            []
+         ],
+         "7": [
+            "HTML",
+            "2021-01-07",
+            "2021-01-22",
+            "HTML anf\u00e4nger",
+            "22222",
+            "22",
+            null,
+            [],
+            [
+               [
+                  "4",
+                  "erfolgreich beendet"
+               ],
+               [
+                  "2",
+                  "erfolgreich beendet"
+               ]
+            ]
+         ]
+      }
+   },
+   "Qualifikation": {
+      "Max-ID": "9",
+      "Count": "9",
+      "List": {
+         "1": [
+            "C++ Anfang",
+            "C++ Anfang teilgenommen",
+            [
+               "2",
+               "4"
+            ]
+         ],
+         "2": [
+            "Teppichbodenlegeexperte",
+            "Kann jetzt Teppichb\u00f6den verlgen",
+            []
+         ],
+         "3": [
+            "Tierern\u00e4hrungsexperte",
+            "Kann Tiere f\u00fcttern",
+            []
+         ],
+         "4": [
+            "C++ integer",
+            "integer sind toll",
+            []
+         ],
+         "5": [
+            "Java entry level",
+            "Basic java",
+            []
+         ],
+         "6": [
+            "First java course",
+            "java first course participation",
+            []
+         ],
+         "7": [
+            "java script",
+            "Kann bisschen java script",
+            []
+         ],
+         "8": [
+            "Java script beginner",
+            "Kann jetzt gut mit java script anfangen",
+            []
+         ],
+         "9": [
+            "test",
+            "test",
+            []
+         ]
+      }
+   },
+   "Zertifikat": {
+      "Max-ID": "4",
+      "Count": "4",
+      "List": {
+         "1": [
+            "C++ Anfaenger Zertifikat",
+            "kann jetzt ein wenig c++",
+            "programmieren",
+            [
+               "2",
+               "4"
+            ]
+         ],
+         "2": [
+            "Python Zertifikat",
+            "Kann jetzt Python",
+            "programmieren",
+            []
+         ],
+         "3": [
+            "Affengeschichten",
+            "Affen im Jungle",
+            "Tiermenschen",
+            [
+               "4"
+            ]
+         ],
+         "4": [
+            "Java entry level certificate",
+            "Java entry level",
+            "programmers",
+            []
+         ]
+      }
+   }
+}
