@@ -10,9 +10,11 @@
 	</tr>
    @var entry;@
    @var i;@
+	@var id;@
    @for i in context@
       @entry = context[i];@
-      <tr id="#entry['id_m']#">
+	  @id = i@
+      <tr id="#id#">
 		 <td>#entry[0]#</td>
          <td>#entry[1]#</td>
          <td>#entry[2]#</td>

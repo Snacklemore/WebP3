@@ -49,7 +49,72 @@ class DetailView_cl {
       }
    }
 }
+class FormView_cl{
+   constructor(el_spl,template_spl, actionType) {
+      this.el_s = el_spl;
+      this.template_s = template_spl;
+      this.actionType = actionType
+   }
 
+   render_px (id,typ) {
+      // Daten anfordern
+      let path_s = "/app/" + this.actionType + "/" + id;
+      if (typ != undefined){
+         path_s = path_s + "/" + typ;
+      }
+      let requester_o = new APPUTIL.Requester_cl();
+      requester_o.request_px(path_s,
+          function (responseText_spl){
+         let data_o = JSON.parse(responseText_spl);
+         this.doRender_p(data_o);
+          }.bind(this),
+          function (responseText_spl){
+         alert("Form render fail");
+          });
+   }
+
+   doRender_p (data_opl) {
+      let markup_s = APPUTIL.tm_o.execute_px(this.template_s, data_opl);
+      let el_o = document.querySelector(this.el_s);
+         if (el_o != null) {
+            el_o.innerHTML = markup_s;
+            this.configHandleEvent_p();
+         }
+   }
+
+   configHandleEvent_p(){
+      let el_o = document.querySelector("form");
+      if (el_o != null){
+         el_o.addEventListener("click", this.handleEvent_p);
+      }
+   }
+
+
+   handleEvent_p(event_a){
+
+      if (event_a.target.id == "idBack")
+      {
+         APPUTIL.es_o.publish_px("app.cmd",["idBack",null]);
+         event_a.preventDefault();
+      }
+      else if (event_a.target.id == "idSave"){
+         let data_o = {};
+         var form = document.getElementById("idForm");
+         var input_type = document.getElementById("action");
+         var para = new URLSearchParams(new FormData(form));
+         let url = "/app/"+input_type.value + "/";
+         var METHOD = "POST"
+
+
+         fetch(url, {method: METHOD, body: para, header: {"Content-type": "application/x-www-form-urlencoded"}}).then(res => res.json())
+             .then(response => console.log("SUCCESS!ID=",response,alert("Speichern erfolgreich"), APPUTIL.es_o.publish_px("app.cmd",["input_type", response])))
+             .catch(error => console.error("Error", error));
+
+         APPUTIL.es_o.publish_px("app.cmd", ["idSave", null]);
+         event_a.preventDefault();
+      }
+   }
+}
 //------------------------------------------------------------------------------
 class ListView_cl {
 //------------------------------------------------------------------------------
@@ -90,6 +155,7 @@ class ListView_cl {
       }
    }
    handleEvent_p (event_opl) {
+      //Auswahl zeile
       if (event_opl.target.tagName.toUpperCase() == "TD") {
          let elx_o = document.querySelector(".clSelected");
          if (elx_o != null) {
@@ -98,6 +164,24 @@ class ListView_cl {
          event_opl.target.parentNode.classList.add("clSelected");
          event_opl.preventDefault();
       }
+      else if (event_opl.target.id == "mitarbeiter"){
+         APPUTIL.es_o.publish_px("app.cmd", ["mitarbeiter", null]);
+      }
+      //Erfassen mitarbeiter
+      else if ( event_opl.target.id == "erfassen_mitarbeiter"){
+         APPUTIL.es_o.publish_px("app.cmd", ["form_mitarbeiter", null, ""]);
+      }
+      //Bearbeiten Mitabeiter
+      else if (event_opl.target.id == "bearbeiten_mitarbeiter"){
+         let elx = document.querySelector(".clSelected");
+         if (elx == null){
+            alert("bitte eintrag wählen");
+
+         }else {
+            APPUTIL.es_o.publish_px("app.cmd", ["form_mitarbeiter", elx.id]);
+         }
+      }
+
    }
 }
 
@@ -141,7 +225,8 @@ class Application_cl {
 
 
       //Pflege Mitarbeiter
-      this.listview_mitarbeiter = new ListView_cl("main", "pflegeMitarbeiter.tpl.html", "mitarbeiter")
+      this.listview_mitarbeiter = new ListView_cl("main", "pflegeMitarbeiter.tpl.html", "mitarbeiter");
+      this.FormView_mitarbeiter = new FormView_cl("main","formMitarbeiter.tpl.html","mitarbeiter");
    }
    notify_px (self, message_spl, data_opl) {
       switch (message_spl) {
@@ -183,14 +268,14 @@ class Application_cl {
 
             break;
          case "mitarbeiter":
-            // Daten anfordern und darstellen
             this.listview_mitarbeiter.render_px(data_opl[1]);
             break;
-         case "detail":
-            this.detailView_o.render_px(data_opl[1]);
+         case "form_mitarbeiter":
+            this.FormView_mitarbeiter.render_px(data_opl[1]);
             break;
          case "idBack":
-            APPUTIL.es_o.publish_px("app.cmd", ["list", null]);
+            var input_type = document.getElementById("action");
+            APPUTIL.es_o.publish_px("app.cmd", [input_type.value, null]);
             break;
          }
          break;

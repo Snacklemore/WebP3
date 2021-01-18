@@ -71,13 +71,15 @@ class Pflege_Mitarbeiter(Parent):
 
     # Returns string dict
     def GET(self, employee_id=None, mitarbeiter=None):
-        if employee_id:
+        if employee_id != 'null':
             employee = self.database.get_list(self.database.employee, entry_id=employee_id, relations=True)
             return json.dumps(employee)
 
-        else:
+        elif employee_id is None:
             employee_list = self.database.get_list(self.database.employee)
             return json.dumps(employee_list)
+        elif employee_id == 'null':
+            return  json.dumps("");
 
     # Returns employee id as a string
     def POST(self, second_name, first_name, academic_degree, occupation):

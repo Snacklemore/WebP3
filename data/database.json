@@ -1,7 +1,7 @@
 {
    "Mitarbeiter": {
-      "Max-ID": "5",
-      "Count": "4",
+      "Max-ID": "6",
+      "Count": "5",
       "List": {
          "2": [
             "Kuerten",
@@ -95,6 +95,15 @@
             "Hans",
             "Realschule",
             "Klemptner",
+            [],
+            [],
+            []
+         ],
+         "6": [
+            "testn",
+            "testv",
+            "test",
+            "testo",
             [],
             [],
             []
