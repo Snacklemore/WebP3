@@ -1,0 +1,94 @@
+<!-- Template -->
+<!-- Contentbereich -->
+
+<div class="headline">Teilnahme - Mitarbeiter - Detail</div>
+<hr>
+
+<div class="headline_small">Mitarbeiter</div>
+<table class="overview">
+	<tr>
+
+        <th>Name</th>
+        <th>Vorname</th>
+        <th>akademische Grade</th>
+        <th>Tätigkeit</th>
+    </tr>
+    <tr >
+         <td id="mitid" data-value=#context[9]# hidden>#context[9]#</td>
+        <td>#context[0]#</td>
+        <td>#context[1]#</td>
+		<td>#context[2]#</td>
+		<td>#context[3]#</td>
+    </tr>
+</table>
+
+<hr>
+
+<div class="headline_small">Verfügbare - Weiterbildungen</div>
+    <table class="overview">
+        <tr>
+            <th>Bezeichnung</th>
+            <th>Von</th>
+            <th>Bis</th>
+            <th>Beschreibung</th>
+            <th>max. Teilnehmer</th>
+            <th>min. Teilnehmer</th>
+        </tr>
+
+        @var entry_a = context[7];@
+   	    @var loop_i;@
+   	    @for loop_i in entry_a@
+      	    @entry_b = entry_a[loop_i];@
+                    <tr id="#entry_b[6]#">
+
+			            <td>#entry_b[0]#</td>
+        	            <td>#entry_b[1]#</td>
+        	            <td>#entry_b[2]#</td>
+			            <td>#entry_b[3]#</td>
+			            <td>#entry_b[4]#</td>
+			            <td>#entry_b[5]#</td>
+                    </tr>
+
+
+        @endfor@
+    </table>
+
+<hr>
+
+<div class="headline_small">Geplante - Weiterbildungen</div>
+    <table class="overview">
+        <tr>
+            <th>Bezeichnung</th>
+            <th>Von</th>
+            <th>Bis</th>
+            <th>Beschreibung</th>
+            <th>max. Teilnehmer</th>
+            <th>min. Teilnehmer</th>
+            <th>Status</th>
+        </tr>
+
+        @var entry_a = context[8];@
+   	    @var loop_i;@
+   	    @for loop_i in entry_a@
+      	    @entry_b = entry_a[loop_i];@
+                @var entryid = entry_b[6]@
+
+                <tr id="#entryid#">
+			        <td>#entry_b[0]#</td>
+        	        <td>#entry_b[1]#</td>
+        	        <td>#entry_b[2]#</td>
+			        <td>#entry_b[3]#</td>
+			        <td>#entry_b[4]#</td>
+			        <td>#entry_b[5]#</td>
+                    <td>#entry_b[7]#</td>
+                </tr>
+
+
+        @endfor@
+    </table>
+
+    <div>
+        <button class="anmelden" id="idSaveTeilnahme">Anmelden</button>
+        <button class="stornieren" id="idDeleteTeilnahme">Stornieren</button>
+    </div>
+<!-- EOF -->

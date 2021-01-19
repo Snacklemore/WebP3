@@ -1,0 +1,100 @@
+<!-- Template -->
+<!-- Contentbereich -->
+
+<div class="headline">Anzeige - Mitarbeiter</div>
+<table class="overview">
+	<tr>
+        <th>Name</th>
+        <th>Vorname</th>
+        <th>akademische Grade</th>
+        <th>Tätigkeit</th>
+	</tr>
+	@var entry_a;@
+	@var loop_i;@
+	@for loop_i in context@
+		@entry_a = context[loop_i];@
+		<!-- Mitarbeiter "rausfiltern"-->
+
+    		<tr>
+    		    <td>#entry_a[0]#</td>
+    		    <td>#entry_a[1]#</td>
+				<td>#entry_a[2]#</td>
+				<td>#entry_a[3]#</td>
+			</tr>
+
+	@endfor@
+</table>
+<p><br>
+<div class="headline">abgeschlossene/geplante Weiterbildungen</div>
+<table class="overview">
+	<tr>
+        <th>Bezeichnung</th><th>Von</th><th>Bis</th><th>Beschreibung</th><th>max. Teilnehmer</th><th>min. Teilnehmer</th>
+    </tr>
+	@var entry_a = context[0][4];@
+	@var loop_i;@
+	@for loop_i in entry_a@
+		@entry_b = entry_a[loop_i]@
+
+
+    		<tr>
+    		    <td>#entry_b[0]#</td>
+				<td>#entry_b[1]#</td>
+				<td>#entry_b[2]#</td>
+				<td>#entry_b[3]#</td>
+				<td>#entry_b[4]#</td>
+				<td>#entry_b[5]#</td>
+
+
+			</tr>
+	@endfor@
+
+
+</table>
+<p><br>
+<div class="headline">Qualifikationen</div>
+<table class="overview">
+    <tr>
+        <th>Bezeichnung</th><th>Beschreibung</th>
+    </tr>
+	@var entry_a = context[0][5];@
+	@var loop_i;@
+	@for loop_i in entry_a@
+		@entry_b = entry_a[loop_i]@
+
+
+    		<tr>
+    		    <td>#entry_b[0]#</td>
+				<td>#entry_b[1]#</td>
+
+
+
+			</tr>
+	@endfor@
+
+</table>
+<p><br>
+<div class="headline">Zertifikate</div>
+<table class="overview">
+	<tr>
+        <th>Bezeichnung</th><th>Beschreibung</th><th>berechtigt zu</th>
+    </tr>
+	@var entry_a = context[0][6];@
+	@var loop_i;@
+	@for loop_i in entry_a@
+		@entry_b = entry_a[loop_i]@
+
+
+    		<tr>
+    		    <td>#entry_b[0]#</td>
+				<td>#entry_b[1]#</td>
+				<td>#entry_b[2]#</td>
+
+
+			</tr>
+	@endfor@
+
+</table>
+<div>
+    <button class="zurückmitarbeiter" id="idBackmitarbeiter">Zurück</button>
+</div>
+<!-- EOF -->

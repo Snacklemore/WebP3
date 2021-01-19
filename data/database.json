@@ -1,7 +1,7 @@
 {
    "Mitarbeiter": {
-      "Max-ID": "6",
-      "Count": "5",
+      "Max-ID": "9",
+      "Count": "6",
       "List": {
          "2": [
             "Kuerten",
@@ -54,6 +54,10 @@
                [
                   "3",
                   "storniert"
+               ],
+               [
+                  "4",
+                  "angemeldet"
                ]
             ],
             [],
@@ -107,13 +111,22 @@
             [],
             [],
             []
+         ],
+         "7": [
+            "testnedited",
+            "testv",
+            "test",
+            "testo",
+            [],
+            [],
+            []
          ]
       }
    },
    "Weiterbildungen": {
-      "Max-ID": "7",
+      "Max-ID": "8",
       "Count": "6",
-      "Participation_count": "1",
+      "Participation_count": "2",
       "List": {
          "1": [
             "C++",
@@ -139,6 +152,10 @@
                [
                   "4",
                   "erfolgreich beendet"
+               ],
+               [
+                  "3",
+                  "angemeldet"
                ]
             ]
          ],
@@ -157,10 +174,6 @@
             [
                [
                   "2",
-                  "storniert"
-               ],
-               [
-                  "3",
                   "storniert"
                ],
                [
@@ -233,7 +246,7 @@
             "2021-01-22",
             "HTML anf\u00e4nger",
             "22222",
-            "22",
+            "19",
             null,
             [],
             [

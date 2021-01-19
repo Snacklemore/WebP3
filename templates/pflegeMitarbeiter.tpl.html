@@ -10,11 +10,11 @@
 	</tr>
    @var entry;@
    @var i;@
-	@var id;@
+	@var idx;@
    @for i in context@
       @entry = context[i];@
-	  @id = i@
-      <tr id="#id#">
+	  @idx = i;@
+      <tr id="#idx#">
 		 <td>#entry[0]#</td>
          <td>#entry[1]#</td>
          <td>#entry[2]#</td>
@@ -23,7 +23,8 @@
    @endfor@
 </table>
 <input type="hidden" id="action" name="action" value="mitarbeiter" />
-
+<input type="hidden" id="methodPUT" name="method" value="PUT" />
+<input type="hidden" id="methodPOST" name="method" value="POST" />
 <div>
 	<button class="buttons" id="erfassen_mitarbeiter">Erfassen</button>
 	<button class="buttons" id="bearbeiten_mitarbeiter">Bearbeiten</button>

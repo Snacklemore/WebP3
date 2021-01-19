@@ -1,0 +1,48 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="headline">Formular - Weiterbildung</div>
+
+   <form class="formular" id="idForm">
+         <input type="hidden" id="training_id" name="training_id" value="#context['id']#" />
+
+      <div>
+         <label for="title">Bezeichnung</label>
+         <input type="string" id="title" name="title" value="#context[0]#" required />
+      </div>
+
+      <div>
+         <label for="date_begin">Von</label>
+         <input type="date" id="date_begin" name="date_begin" value="#context[1]#" required />
+      </div>
+
+      <div>
+         <label for="date_end">Bis</label>
+         <input type="date" id="date_end" name="date_end" value="#context[2]#" required />
+      </div>
+
+      <div>
+         <label for="description">Beschreibung</label>
+         <input type="text" id="description" name="description" value="#context[3]#" required />
+      </div>
+
+      <div>
+         <label for="max_attendees">max. Teilnehmer</label>
+         <input type="number" id="max_attendees" name="max_attendees" value="#context[4]#" required />
+      </div>
+
+      <div>
+         <label for="min_attendees">min. Teilnehmer</label>
+         <input type="number" id="min_attendees" name="min_attendees" value="#context[5]#" required />
+      </div>
+
+      <hr>
+
+      <div>
+         <button class="buttons" id="idBack">Zurück</button>
+         <button class="buttons" id="idSave">Speichern</button>
+      </div>
+   </form>
+
+   <input type="hidden" id="action" name="action" value="weiterbildung" />
+
+<div> </div>

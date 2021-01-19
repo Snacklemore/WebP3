@@ -1,0 +1,82 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="headline">Anzeige - Weiterbildung</div>
+<table class="overview">
+<tr>
+    <th>Bezeichnung</th>
+    <th>Von</th>
+    <th>Bis</th>
+    <th>Beschreibung</th>
+    <th>max. Teilnehmer</th>
+    <th>min. Teilnehmer</th>
+</tr>
+    <tr>
+        @var entry_a;@
+        @var loop_i;@
+        @for loop_i in context@
+            @entry_a = context[loop_i];@
+            <!-- Weiterbildungen "rausfiltern"-->
+
+                <td>#entry_a[0]#</td>
+                <td>#entry_a[1]#</td>
+                <td>#entry_a[2]#</td>
+                <td>#entry_a[3]#</td>
+		        <td>#entry_a[4]#</td>
+                <td>#entry_a[5]#</td>
+
+        @endfor@
+    </tr>
+</table>
+<p><br>
+<div class="headline">Qualifikation</div>
+<table class="overview">
+	<tr>
+        <th>Bezeichnung</th>
+        <th>Beschreibung</th>
+	</tr>
+
+
+        @var entry_a = context[0][7];@
+        @var loop_i;@
+        @for loop_i in entry_a@
+            @entry_b = entry_a[loop_i];@
+
+         <tr>
+            <!-- Weiterbildungen "rausfiltern"-->
+
+                <td>#entry_b[0]#</td>
+                <td>#entry_b[1]#</td>
+        </tr>
+        @endfor@
+
+
+
+</table>
+<p><br>
+<div class="headline">Zertifikat</div>
+<table class="overview">
+	    <tr>
+            <th>Bezeichnung</th>
+            <th>Beschreibung</th>
+            <th>berechtigt zu</th>
+        </tr>
+
+</table>
+<p><br>
+<div class="headline">Teilnehmer</div>
+    <table class="overview">
+	        <tr>
+                <th>Name</th>
+                <th>Vorname</th>
+                <th>akademische Grade</th>
+                <th>Tätigkeit</th>
+            </tr>
+
+    </table>
+
+<div>
+    <button class="zurückweiterbildung" id="idBackweiterbildung">Zurück</button>
+</div>
+
+<div> </div>
+<!-- EOF -->

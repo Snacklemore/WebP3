@@ -1,0 +1,38 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="headline">Datenpflege - Weiterbildung</div>
+<table class="overview">
+   <tr>
+		<th>Bezeichnung</th>
+		<th>Von</th>
+		<th>Bis</th>
+		<th>Beschreibung</th>
+		<th>max. Teilnehmer</th>
+		<th>min. Teilnehmer</th>
+	</tr>
+   @var entry_a;@
+   @var loop_i;@
+    @var idx;@
+
+   @for loop_i in context@
+    @idx = loop_i;@
+      @entry_a = context[loop_i];@
+      <tr id="#idx#">
+		 <td>#entry_a[0]#</td>
+         <td>#entry_a[1]#</td>
+         <td>#entry_a[2]#</td>
+		 <td>#entry_a[3]#</td>
+		 <td>#entry_a[4]#</td>
+		 <td>#entry_a[5]#</td>
+      </tr>
+   @endfor@
+</table>
+<input type="hidden" id="action" name="action" value="weiterbildung" />
+
+<div>
+	<button class="buttons" id="erfassen_weiterbildung">Erfassen</button>
+	<button class="buttons" id="bearbeiten_weiterbildung">Bearbeiten</button>
+	<button class="buttons" id="anzeigen_weiterbildung">Anzeigen</button>
+	<button class="buttons" id="idDelete">Entfernen</button>
+</div>
+<!-- EOF -->
