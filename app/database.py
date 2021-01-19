@@ -119,6 +119,53 @@ class Database:
         # Notice that data is a REFERENCE to the dictionary
         return data
 
+    def change_employee_participation_status(self, employee_id, training_id, new_status):
+        try:
+            # Check if new_status is valid
+            if new_status not in self.get_participation_status_array():
+                raise KeyError
+
+            # Get employee and training
+            employee = self.__get_list(self.employee, entry_id=employee_id)
+            training = self.__get_list(self.training, entry_id=training_id)
+
+            # Check if employee participated in given training by comparing ids
+            for training_ in employee[4]:
+                if training_[0] == training_id:
+                    # Change status in employee
+                    old_status = training_[1]
+                    training_[1] = new_status
+
+                    # Change status in training
+                    for employee_ in training[-1]:
+                        if employee_[0] == employee_id:
+                            employee_[1] = new_status
+                            break
+
+                    # Check if old status was "erfolgreich beendet" if so remove qualifications and certificates from employee
+                    if old_status == "erfolgreich":
+                        for qualification_id in training[-2]:
+                            self.remove_employee_from_qualification(qualification_id, employee_id)
+                        if training[-3] is not None:
+                            self.remove_employee_from_certificate(training[-3], employee_id)
+
+                    # Check if new status is requires to add qualification and certificate to employee
+                    if new_status == "erfolgreich":
+                        for qualification_id in training[-2]:
+                            # Check for duplicates
+                            if qualification_id not in employee[5]:
+                                self.add_qualification_to_employee(qualification_id, employee_id)
+                        # Check if training has a certificate and if the employee has not already owned it
+                        if training[-3] is not None and training[-3] not in employee[6]:
+                            self.add_certificate_to_employee(training[-3], employee_id)
+
+                    break
+
+            self.write_json_file()
+            return True
+
+        except (KeyError, ValueError):
+            return None
     # Public method to be accessed from outside the class | Notice it returns a value copy not reference
     # Reason -> database should only be changed from methods inside the class
     # relations: If True relations are returned as well | False: no relations are returned
@@ -223,6 +270,8 @@ class Database:
                         for counter, employee in enumerate(data[8]):
                             data[8][counter] = self.get_list(self.employee, entry_id=employee[0])
                             data[8][counter].append(employee[1])
+                            # Add id
+                            data[8][counter].append(employee[0])
 
                     else:
                         for training in data:
@@ -239,6 +288,7 @@ class Database:
                             for counter, employee in enumerate(data[training][8]):
                                 data[training][8][counter] = self.get_list(self.employee, entry_id=employee[0])
                                 data[training][8][counter].append(employee[1])
+                                data[training][8][counter].append(employee[0])
 
                 elif dict_name is self.qualification:
                     if entry_id is not None:
@@ -379,7 +429,7 @@ class Database:
 
             # Check if participation status is successful
             # If so add qualification and certificate to employee
-            if employee_participation_status.lower() in "erfolgreich beendet":
+            if employee_participation_status.lower() in "erfolgreich":
                 for qualification_id in training[-2]:
                     self.add_qualification_to_employee(qualification_id, employee_id)
                 if training[-3] is not None:
@@ -518,11 +568,11 @@ class Database:
 
     def get_participation_status_array(self, finished=False, not_finished=False):
         if finished is True:
-            return ["storniert", "abgebrochen", "nicht erfolgreich beendet", "erfolgreich beendet"]
+            return ["storniert", "abgebrochen", "nicht erfolgreich", "erfolgreich"]
         elif not_finished is True:
             return ["angemeldet", "nimmt teil"]
         else:
-            return ["angemeldet", "nimmt teil", "storniert", "abgebrochen", "nicht erfolgreich beendet", "erfolgreich beendet"]
+            return ["angemeldet", "nimmt teil", "storniert", "abgebrochen", "nicht erfolgreich", "erfolgreich"]
 
     ''' # Qualification Training methods # '''
 

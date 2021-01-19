@@ -267,6 +267,7 @@ class Teilnahme_cl(Parent):
             #get trainingdata with id and participants(with ids)
             training = self.database.get_list(self.database.training, entry_id=id, relations=True)
             idlist = [id]
+
             return json.dumps(training + idlist)
 
         else:
@@ -288,9 +289,8 @@ class Teilnahme_cl(Parent):
         # -------------------------------------------------------
         #noway to change status in one call. get employee ->change its training status
         #-> put back in
-        employee = self.database.get_list(self.database.employee, entry_id=id_m, relations=True)
-
-
+        # get training->change training status of employee->putback in
+        var = self.database.change_employee_participation_status(employee_id=id_m, training_id=id_w,new_status=status)
 
         return
 
@@ -351,34 +351,47 @@ class Teilnahme_Weiterbildung(Parent):
 @cherrypy.expose
 class Auswertung_Mitarbeiter(Parent):
 
-    def GET(self):
-        employee_list = self.database.get_list(self.database.employee, relations=True, relations_true_value=True)
-        employee_list = sorted(employee_list.items(), key=lambda x: x[1][0])
+    def GET(self, id=None, auswertungMitarbeiter=None):
+        if id == None:
+            employee_list = self.database.get_list(self.database.employee, relations=True, relations_true_value=True)
+            employee_list = sorted(employee_list.items(), key=lambda x: x[1][0])
 
-        for employee in employee_list:
-            employee[1][4] = sorted(employee[1][4], key=lambda x: x[1])
+            for employee in employee_list:
+                employee[1][4] = sorted(employee[1][4], key=lambda x: x[1])
 
-        return json.dumps(employee_list)
+            return json.dumps(employee_list)
+        else:
+            employee = self.database.get_list(self.database.employee,entry_id=id, relations=True)
+            return json.dumps(employee)
+            pass
 
 
 @cherrypy.expose
 class Auswertung_Weiterbildung(Parent):
 
-    def GET(self):
-        training_list = self.database.get_list(self.database.training, relations=True, relations_true_value=True)
-        training_list = sorted(training_list.items(), key=lambda x: x[1][0])
-        for training in training_list:
-            training[1][-1] = list(filter(lambda x: x[4] == "erfolgreich beendet", training[1][-1]))
+    def GET(self, id=None, auswertungWeiterbildung=None):
+        if id == None:
+            training_list = self.database.get_list(self.database.training, relations=True, relations_true_value=True)
+            training_list = sorted(training_list.items(), key=lambda x: x[1][0])
+            for training in training_list:
+                training[1][-1] = list(filter(lambda x: x[4] == "erfolgreich beendet", training[1][-1]))
 
-        return json.dumps(training_list)
+            return json.dumps(training_list)
+        else:
+            training = self.database.get_list(self.database.training,entry_id=id, relations=True)
+            return json.dumps(training)
 
 
 @cherrypy.expose
 class Auswertung_Zertifikat(Parent):
 
-    def GET(self):
-        certificate_list = self.database.get_list(self.database.certificate, relations=True, relations_true_value=True)
+    def GET(self, id=None, auswertungZertifikat=None):
+        if id == None:
+            certificate_list = self.database.get_list(self.database.certificate, relations=True, relations_true_value=True)
 
-        certificate_list = sorted(certificate_list.items(), key=lambda x: x[1][0])
+            certificate_list = sorted(certificate_list.items(), key=lambda x: x[1][0])
 
-        return json.dumps(certificate_list)
+            return json.dumps(certificate_list)
+        else:
+            certificate = self.database.get_list(self.database.certificate,entry_id=id, relations=True)
+            return json.dumps(certificate)

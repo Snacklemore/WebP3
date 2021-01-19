@@ -170,52 +170,52 @@ class DetailView_cl {
             alert("Bitte zuerst einen gültigen Eintrag auswählen!");
          }
          else {
-            APPUTIL.es_o.publish_px("app.cmd", ["addteilnahme", elx.id, mitarbeiterdaten] );  //rufe addteilnahme auf und übergebe die Weiterbildungs-ID und die Mitarbeiter-ID. Funktion läuft über publish_px in evs.js. Von dort wird die notify_px in main.js aufgerufen. Dort muss ein case und eine Funktion mit "addteilnahme" existieren. Und dort wird es dann in die Application.py übergeben mit dem Befehel POST.
+            APPUTIL.es_o.publish_px("app.cmd", ["addteilnahme", elx.id, mitarbeiterdaten] );
          }
       } //teilnahme stornieren in teilnahme mitarbeiter
       else if ( event_opl.target.id == "idDeleteTeilnahme"){
          var elx = document.querySelector(".clSelected");
 
-         var mitarbeiterdaten = document.getElementById("mitid").dataset.value;  //hole Mitarbeiter-ID von der Tpl Datei
-         if (elx== null || elx.id == mitarbeiterdaten) {  //Falls kein Tabelleneintrag ausgewählt wurde oder der ausgewählte Tabelleneintrag == der MitarbeiterID ist, dann blockiere. (Man kann keinen Mitarbeiter stornieren. Nur eine Weiterbildung :))
+         var mitarbeiterdaten = document.getElementById("mitid").dataset.value;
+         if (elx== null || elx.id == mitarbeiterdaten) {
 
             alert("Bitte zuerst einen gültigen Eintrag auswählen!");
          }
          else {
-            APPUTIL.es_o.publish_px("app.cmd", ["deleteteilnahme", elx.id, mitarbeiterdaten] );  //rufe deleteteilnahme auf und übergebe die Weiterbildungs-ID und die Mitarbeiter-ID. Funktion läuft über publish_px in evs.js. Von dort wird die notify_px in main.js aufgerufen. Dort muss ein case und eine Funktion mit "deleteteilnahme" existieren. Und dort wird es dann in die Application.py übergeben mit dem Befehel DELETE.
+            APPUTIL.es_o.publish_px("app.cmd", ["deleteteilnahme", elx.id, mitarbeiterdaten] );
          }
       }else if (event_opl.target.id == "erfolgTeilnahme"){
-         var elx = document.querySelector(".clSelected");   //ID von Tabellenzeile wird abgefragt
-         var weiterbildungdaten = document.getElementById("weiid").dataset.value;  //hole Weiterbildung-ID von der Tpl Datei
-         if (elx == null || elx.id == weiterbildungdaten) {   //Falls kein Tabelleneintrag ausgewählt wurde oder der ausgewählte Tabelleneintrag == der WeiterbildungsID ist, dann blockiere. (Man kann den Status nur für Mitarbeiter ändern, nicht für eine Weiterbildung :))
+         var elx = document.querySelector(".clSelected");
+         var weiterbildungdaten = document.getElementById("weiid").dataset.value;
+         if (elx == null || elx.id == weiterbildungdaten) {
 
             alert("Bitte zuerst einen gültigen Eintrag auswählen!");
          }
          else {
             status = "erfolgreich";
-            APPUTIL.es_o.publish_px("app.cmd", ["erfolgTeilnahme", elx.id, weiterbildungdaten, status]);  //übergebe die Mitarbeiter-ID und die WeiterbildungsID, sowie den Status
+            APPUTIL.es_o.publish_px("app.cmd", ["erfolgTeilnahme", elx.id, weiterbildungdaten, status]);
          }
       }else if (event_opl.target.id == "nichterfolgTeilnahme"){
-         var elx = document.querySelector(".clSelected");   //ID von Tabellenzeile wird abgefragt
-         var weiterbildungdaten = document.getElementById("weiid").dataset.value;  //hole Weiterbildung-ID von der Tpl Datei
-         if (elx == null || elx.id == weiterbildungdaten) {   //Falls kein Tabelleneintrag ausgewählt wurde oder der ausgewählte Tabelleneintrag == der WeiterbildungsID ist, dann blockiere. (Man kann den Status nur für Mitarbeiter ändern, nicht für eine Weiterbildung :))
+         var elx = document.querySelector(".clSelected");
+         var weiterbildungdaten = document.getElementById("weiid").dataset.value;
+         if (elx == null || elx.id == weiterbildungdaten) {
 
             alert("Bitte zuerst einen gültigen Eintrag auswählen!");
          }
          else {
             status = "nicht erfolgreich";
-            APPUTIL.es_o.publish_px("app.cmd", ["nichterfolgTeilnahme", elx.id, weiterbildungdaten, status]);   //übergebe die Mitarbeiter-ID und die WeiterbildungsID, sowie den Status
+            APPUTIL.es_o.publish_px("app.cmd", ["nichterfolgTeilnahme", elx.id, weiterbildungdaten, status]);
          }
       } else if (event_opl.target.id == "abbruchTeilnahme"){
-         var elx = document.querySelector(".clSelected");   //ID von Tabellenzeile wird abgefragt
-         var weiterbildungdaten = document.getElementById("weiid").dataset.value;  //hole Weiterbildung-ID von der Tpl Datei
-         if (elx == null || elx.id == weiterbildungdaten) {   //Falls kein Tabelleneintrag ausgewählt wurde oder der ausgewählte Tabelleneintrag == der WeiterbildungsID ist, dann blockiere. (Man kann den Status nur für Mitarbeiter ändern, nicht für eine Weiterbildung :))
+         var elx = document.querySelector(".clSelected");
+         var weiterbildungdaten = document.getElementById("weiid").dataset.value;
+         if (elx == null || elx.id == weiterbildungdaten) {
 
             alert("Bitte zuerst einen gültigen Eintrag auswählen!");
          }
          else {
-            status = "abgebrochen";
-            APPUTIL.es_o.publish_px("app.cmd", ["abbruchTeilnahme", elx.id, weiterbildungdaten, status]); //übergebe die Mitarbeiter-ID und die WeiterbildungsID, sowie den Status
+            status = "storniert";
+            APPUTIL.es_o.publish_px("app.cmd", ["abbruchTeilnahme", elx.id, weiterbildungdaten, status]);
          }
       }
 
@@ -438,6 +438,37 @@ class ListView_cl {
 
             console.log("anzeigen_teilnahme_weiterbildung");
             APPUTIL.es_o.publish_px("app.cmd", ["anzeigen_teilnahme_weiterbildung", elx_o.id, "isW"] );
+         }//Auswertung mitarbeiter anzeigen
+      } else if (event_opl.target.id == "anzeigen_auswertung_mitarbeiter"){
+         let elx = document.querySelector(".clSelected"); //ID von Tabellenzeile wird abgefragt
+         if (elx == null) { //Falls kein Tabelleneintrag ausgewählt wurde
+
+            alert("Bitte zuerst einen Eintrag auswählen!");
+         }else {
+
+            console.log("anzeigen_auswertung_mitarbeiter");
+            APPUTIL.es_o.publish_px("app.cmd", ["anzeigen_auswertung_mitarbeiter", elx.id] ); //Tag anzeigen_auswertung_mitarbeiter und die ausgewählte Zeilen-ID wird übergeben. Weiter unten wird das Tag abgefragt und dann an Application.py übergeben.
+         }
+         //auswertung weiterbildung anzeigen
+      } else if (event_opl.target.id == "anzeigen_auswertung_weiterbildung"){
+         let elx = document.querySelector(".clSelected"); //ID von Tabellenzeile wird abgefragt
+         if (elx == null) { //Falls kein Tabelleneintrag ausgewählt wurde
+
+            alert("Bitte zuerst einen Eintrag auswählen!");
+         }else {
+
+            console.log("anzeigen_auswertung_weiterbildung");
+            APPUTIL.es_o.publish_px("app.cmd", ["anzeigen_auswertung_weiterbildung", elx.id] );  //Tag anzeigen_auswertung_weiterbildung und die ausgewählte Zeilen-ID wird übergeben. Weiter unten wird das Tag abgefragt und dann an Application.py übergeben.
+         }
+      }else if(event_opl.target.id == "anzeigen_auswertung_zertifikat"){
+         let elx = document.querySelector(".clSelected"); //ID von Tabellenzeile wird abgefragt
+         if (elx == null) { //Falls kein Tabelleneintrag ausgewählt wurde
+
+            alert("Bitte zuerst einen Eintrag auswählen!");
+         }else {
+
+            console.log("anzeigen_auswertung_zertifikat");
+            APPUTIL.es_o.publish_px("app.cmd", ["anzeigen_auswertung_zertifikat", elx.id] );  //Tag anzeigen_auswertung_zertifikat und die ausgewählte Zeilen-ID wird übergeben. Weiter unten wird das Tag abgefragt und dann an Application.py übergeben.
          }
       }
 
@@ -501,6 +532,15 @@ class Application_cl {
       //Teilnahme Weiterbildung
       this.listView_teilnahme_weiterbildung = new ListView_cl("main", "TeilnahmeWeiterbildung.tpl.html", "weiterbildung");
       this.DetailView_teilnahme_weiterbildung = new DetailView_cl("main", "TeilnahmeWeiterbildungAnzeige.tpl.html", "teilnahme");
+      //auswertung Mitarbeiter
+      this.listview_auswertung_mitarbeiter = new ListView_cl("main","AuswertungMitarbeiter.tpl.html","auswertungMitarbeiter");
+      this.DetailView_auswertung_mitarbeiter = new DetailView_cl("main", "AuswertungMitarbeiterAnzeigen.tpl.html", "auswertungMitarbeiter");
+      //auswertung Weiterbildung
+      this.listview_auswertung_weiterbildung = new ListView_cl("main", "AuswertungWeiterbildung.tpl.html", "auswertungWeiterbildung");
+      this.DetailView_auswertung_weiterbildung = new DetailView_cl("main", "AuswertungWeiterbildungAnzeigen.tpl.html", "auswertungWeiterbildung");
+      //auswertung Zertifikate
+      this.listview_auswertung_zertifikat = new ListView_cl("main", "AuswertungZertifikat.tpl.html", "auswertungZertifikat");
+      this.DetailView_auswertung_zertifikat = new DetailView_cl("main", "AuswertungZertifikatAnzeigen.tpl.html", "auswertungZertifikat")
    }
    notify_px (self, message_spl, data_opl) {
       switch (message_spl) {
@@ -615,7 +655,27 @@ class Application_cl {
                   fetch(url, {method: 'PUT', headers: {'Content-Type': 'application/json'} })
       				APPUTIL.es_o.publish_px("app.cmd", ["teilnahme_weiterbildung", null]);
                break;
-
+               //Auswertung mitarbeiter
+            case "auswertung_mitarbeiter":
+               this.listview_auswertung_mitarbeiter.render_px(data_opl[1]);
+               break;
+            case "anzeigen_auswertung_mitarbeiter":
+               this.DetailView_auswertung_mitarbeiter.render_px(data_opl[1]);
+               break;
+               //Auswertung weiterbildung
+            case "auswertung_weiterbildung":
+               this.listview_auswertung_weiterbildung.render_px(data_opl[1]);
+               break;
+            case "auswertung_weiterbildung_anzeigen":
+               this.DetailView_auswertung_weiterbildung.render_px(data_opl[1]);
+               break;
+               //Auswertung Zertifikat
+            case "auswertung_zertifikat":
+               this.listview_auswertung_zertifikat.render_px(data_opl[1]);
+               break;
+            case "anzeigen_auswertung_zertifikat":
+               this.DetailView_auswertung_zertifikat.render_px(data_opl[1]);
+               break;
             case "idBack":
                var input_type = document.getElementById("action");
                APPUTIL.es_o.publish_px("app.cmd", [input_type.value, null]);

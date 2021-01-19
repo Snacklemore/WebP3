@@ -27,15 +27,11 @@
                ],
                [
                   "7",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ]
             ],
-            [
-               "1"
-            ],
-            [
-               "1"
-            ]
+            [],
+            []
          ],
          "3": [
             "Annacker",
@@ -75,15 +71,15 @@
                ],
                [
                   "1",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ],
                [
                   "3",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ],
                [
                   "7",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ]
             ],
             [
@@ -146,16 +142,12 @@
                   "storniert"
                ],
                [
+                  "4",
+                  "erfolgreich"
+               ],
+               [
                   "3",
                   "storniert"
-               ],
-               [
-                  "4",
-                  "erfolgreich beendet"
-               ],
-               [
-                  "3",
-                  "angemeldet"
                ]
             ]
          ],
@@ -198,7 +190,7 @@
                ],
                [
                   "4",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ],
                [
                   "2",
@@ -252,11 +244,11 @@
             [
                [
                   "4",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ],
                [
                   "2",
-                  "erfolgreich beendet"
+                  "erfolgreich"
                ]
             ]
          ]
@@ -270,7 +262,6 @@
             "C++ Anfang",
             "C++ Anfang teilgenommen",
             [
-               "2",
                "4"
             ]
          ],
@@ -325,7 +316,6 @@
             "kann jetzt ein wenig c++",
             "programmieren",
             [
-               "2",
                "4"
             ]
          ],

@@ -1,0 +1,31 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="headline">Auswertung - Mitarbeiter</div>
+<table class="overview">
+   <tr>
+		<th>Name</th>
+		<th>Vorname</th>
+		<th>Akademischer Grad</th>
+		<th>Tätigkeit</th>
+	</tr>
+   @var entry_a;@
+   @var loop_i;@
+   @for loop_i in context@
+      @entry_a = context[loop_i];@
+      <!-- Mitarbeiter "rausfiltern"-->
+
+         <tr id="#entry_a[0]#">
+             <td>#entry_a[1][0]#</td>
+             <td>#entry_a[1][1]#</td>
+             <td>#entry_a[1][2]#</td>
+             <td>#entry_a[1][3]#</td>
+         </tr>
+
+   @endfor@
+</table>
+<input type="hidden" id="action" name="action" value="mitarbeiter" />
+
+<div>
+	<button class="buttons" id="anzeigen_auswertung_mitarbeiter">Anzeigen</button>
+</div>
+<!-- EOF -->

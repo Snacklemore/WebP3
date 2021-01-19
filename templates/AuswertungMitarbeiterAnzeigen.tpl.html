@@ -1,0 +1,56 @@
+<!-- Template -->
+<!-- Contentbereich -->
+<div class="headline">Auswertung - Mitarbeiter - Detail</div>
+
+<hr>
+
+<div class="headline_small">Mitarbeiter</div>
+<table class="overview">
+	<tr>
+        <th>Name</th>
+        <th>Vorname</th>
+        <th>akademische Grade</th>
+        <th>Tätigkeit</th>
+    </tr>
+    @var entry_a = context;@
+    @var loop_i;@
+
+
+            <tr>
+                <td>#entry_a[0]#</td>
+                <td>#entry_a[1]#</td>
+	        	<td>#entry_a[2]#</td>
+	        	<td>#entry_a[3]#</td>
+            </tr>
+
+</table>
+
+<hr>
+
+<div class="headline_small">Weiterbildungen</div>
+<table class="overview">
+	<tr>
+        <th>Bezeichnung</th>
+        <th>Von</th>
+        <th>Bis</th>
+        <th>Status</th>
+    </tr>
+    @var entry_a = context[4];@
+    @var loop_i;@
+    @for loop_i in entry_a@
+        @entry_b = entry_a[loop_i];@
+        <tr>
+            <td>#entry_b[0]#</td>
+            <td>#entry_b[1]#</td>
+	        <td>#entry_b[2]#</td>
+	        <td>#entry_b[6]#</td>
+        </tr>
+    @endfor@
+</table>
+
+<div>
+    <button class="zurück_auswertung_mitarbeiter" id="idBackAuswertungMitarbeiter">Zurück</button>
+</div>
+
+<div> </div>
+<!-- EOF -->

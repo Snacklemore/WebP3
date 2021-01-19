@@ -33,18 +33,22 @@
         <th>Vorname</th>
         <th>akademische Grade</th>
         <th>Tätigkeit</th>
+        <th>Status</th>
+
     </tr>
 
-    @var entry_a;@
+    @var entry_a = context[8];@
    	@var loop_i;@
-   	@for loop_i in context@
-          @entry_a = context[loop_i];@
+    @var entry_b;@
+   	@for loop_i in entry_a@
+          @entry_b = entry_a[loop_i];@
 
-		        <tr id="#context[0]#">
-		        	<td>#entry_a[1]#</td>
-                	<td>#entry_a[2]#</td>
-                	<td>#entry_a[3]#</td>
-		        	<td>#entry_a[4]#</td>
+		        <tr id="#entry_b[5]#">
+		        	<td>#entry_b[0]#</td>
+                	<td>#entry_b[1]#</td>
+                	<td>#entry_b[2]#</td>
+		        	<td>#entry_b[3]#</td>
+                    <td>#entry_b[4]#</td>
                 </tr>
 
 	@endfor@
