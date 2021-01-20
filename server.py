@@ -95,6 +95,14 @@ def main():
       {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
    )
 
+
+# 2. Eintrag: Method-Dispatcher für "Auswertung Zertifikate"
+   cherrypy.tree.mount(
+      application.startseite(),
+      '/app/startseite/',
+      {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
+   )
+
    # 2. Eintrag: Method-Dispatcher für die "Applikation" "templates" vereinbaren
    cherrypy.tree.mount(
       template.Template_cl(),

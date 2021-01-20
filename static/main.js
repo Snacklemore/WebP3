@@ -20,8 +20,12 @@ class DetailView_cl {
    }
    render_px (id_spl,isW) {
       // Daten anfordern
-
       let path_s = "/app/" +this.actionType+"/" +id_spl;
+      if (id_spl == undefined)
+      {
+         path_s = "/app/" +this.actionType
+      }
+
       if (isW !== undefined){
          path_s = "/app/" +this.actionType+"/" +id_spl +"/" +isW;
       }
@@ -459,7 +463,7 @@ class ListView_cl {
 
             console.log("anzeigen_auswertung_weiterbildung");
             APPUTIL.es_o.publish_px("app.cmd", ["anzeigen_auswertung_weiterbildung", elx.id] );  //Tag anzeigen_auswertung_weiterbildung und die ausgewählte Zeilen-ID wird übergeben. Weiter unten wird das Tag abgefragt und dann an Application.py übergeben.
-         }
+         }//auswertung zertifikat anzeigen
       }else if(event_opl.target.id == "anzeigen_auswertung_zertifikat"){
          let elx = document.querySelector(".clSelected"); //ID von Tabellenzeile wird abgefragt
          if (elx == null) { //Falls kein Tabelleneintrag ausgewählt wurde
@@ -515,7 +519,8 @@ class Application_cl {
 
       var m = document.getElementsByTagName("main");
          m.id = btoa("main")
-
+      //Startseite
+      this.DetailView_home = new DetailView_cl("main", "home.tpl.html", "startseite")
       //Pflege Mitarbeiter
       this.listview_mitarbeiter = new ListView_cl("main", "pflegeMitarbeiter.tpl.html", "mitarbeiter");
       this.FormView_mitarbeiterPUT = new FormView_cl("main","formMitarbeiter.tpl.html","mitarbeiter", "PUT");
@@ -579,7 +584,7 @@ class Application_cl {
          // hier müsste man überprüfen, ob der Inhalt gewechselt werden darf
          switch (data_opl[0]) {
             case "home":
-
+               this.DetailView_home.render_px();
                 break;
 
 
@@ -666,7 +671,7 @@ class Application_cl {
             case "auswertung_weiterbildung":
                this.listview_auswertung_weiterbildung.render_px(data_opl[1]);
                break;
-            case "auswertung_weiterbildung_anzeigen":
+            case "anzeigen_auswertung_weiterbildung":
                this.DetailView_auswertung_weiterbildung.render_px(data_opl[1]);
                break;
                //Auswertung Zertifikat
@@ -691,6 +696,15 @@ class Application_cl {
                break;
             case "idBackweiterbildung":
                APPUTIL.es_o.publish_px("app.cmd", ["weiterbildung",null]);
+               break;
+            case "idBackAuswertungMitarbeiter":
+               APPUTIL.es_o.publish_px("app.cmd", ["auswertung_mitarbeiter", null]);
+               break;
+            case "idBackAuswertungWeiterbildung":
+               APPUTIL.es_o.publish_px("app.cmd", ["auswertung_mitarbeiter", null]);
+               break;
+            case "idBackAuswertungZertifikat":
+               APPUTIL.es_o.publish_px("app.cmd", ["auswertung_zertifikat", null]);
                break;
             case "idDelete":
                if (confirm("Entfernen?")){

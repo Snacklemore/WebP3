@@ -1,5 +1,22 @@
 <!-- Template -->
-<p>
-   Startseite
-</p>
-@include footer.tpl.html "Beims"@
+<div class="headline"> Startseite</div>
+
+<div>
+	<table class="overview">
+		<tr>
+			<th>Anzahl Mitarbeiter</th>
+			<th>Anzahl Weiterbildungen</th>
+			<th>Anzahl Teilnahmen</th>
+
+		</tr>
+		<tr>
+			<td>#context['Employee_count']#</td>
+			<td>#context['training_count']#</td>
+			<td>#context['participation_count']#</td>
+
+		</tr>
+
+	</table>
+</div>
+
+<div> </div>

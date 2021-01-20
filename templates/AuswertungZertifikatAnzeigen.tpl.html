@@ -12,15 +12,15 @@
         <th>akademische Grade</th>
         <th>Tätigkeit</th>
     </tr>
-    @var entry_a;@
+    @var entry_a = context[3];@
     @var loop_i;@
-    @for loop_i in context@
-       @entry_a = context[loop_i];@
+    @for loop_i in entry_a@
+       @entry_b = entry_a[loop_i];@
             <tr>
-                <td>#entry_a['name']#</td>
-                <td>#entry_a['vorname']#</td>
-	        	<td>#entry_a['akagrad']#</td>
-	        	<td>#entry_a['taetigkeit']#</td>
+                <td>#entry_b[0]#</td>
+                <td>#entry_b[1]#</td>
+	        	<td>#entry_b[2]#</td>
+	        	<td>#entry_b[3]#</td>
             </tr>
     @endfor@
 </table>

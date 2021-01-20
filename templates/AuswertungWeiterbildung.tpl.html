@@ -10,21 +10,22 @@
 		<th>max. Teilnehmer</th>
 		<th>min. Teilnehmer</th>
 	</tr>
-   @var entry_a;@
-   @var loop_i;@
-   @for loop_i in context@
+    @var entry_a;@
+    @var loop_i;@
+	@var entry_b;@
+    @for loop_i in context@
 	  @entry_a = context[loop_i];@
 	  	<!-- Weiterbildungen "rausfiltern"-->
-		@if entry_a['von_w'] != null@
-      	<tr id="#entry_a['id_w']#">
-			<td>#entry_a['bezeichnung_w']#</td>
-      	   	<td>#entry_a['von_w']#</td>
-      	   	<td>#entry_a['bis_w']#</td>
-			<td>#entry_a['beschreibung_w']#</td>
-			<td>#entry_a['maxteilnehmer_w']#</td>
-			<td>#entry_a['minteilnehmer_w']#</td>
+		@entry_b = entry_a[1]@
+      	<tr id="#entry_a[0]#">
+			<td>#entry_b[0]#</td>
+      	   	<td>#entry_b[1]#</td>
+      	   	<td>#entry_b[2]#</td>
+			<td>#entry_b[3]#</td>
+			<td>#entry_b[4]#</td>
+			<td>#entry_b[5]#</td>
 	  	</tr>
-	  @endif@
+
    @endfor@
 </table>
 <input type="hidden" id="action" name="action" value="weiterbildung" />

@@ -48,7 +48,7 @@ class Parent:
 
 
 @cherrypy.expose
-class Startseite(Parent):
+class startseite(Parent):
 
     def GET(self):
         # change_count methods return int
@@ -60,7 +60,7 @@ class Startseite(Parent):
                                                                  ('training_count', training_count),
                                                                  ('participation_count', participation_count))
 
-        return return_dict
+        return json.dumps(return_dict)
 
 
 @cherrypy.expose
@@ -378,7 +378,7 @@ class Auswertung_Weiterbildung(Parent):
 
             return json.dumps(training_list)
         else:
-            training = self.database.get_list(self.database.training,entry_id=id, relations=True)
+            training = self.database.get_list(self.database.training, entry_id=id, relations=True)
             return json.dumps(training)
 
 

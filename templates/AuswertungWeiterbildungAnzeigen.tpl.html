@@ -15,21 +15,21 @@
             <th>min. Teilnehmer</th>
         </tr>
 @var entry_a;@
-@var loop_i;@
-@for loop_i in context@
-   @entry_a = context[loop_i];@
+
+
+   @entry_a = context;@
     <!-- Weiterbildungen "rausfiltern"-->
-    @if entry_a['id_w'] != null@
+
         <tr>
-            <td>#entry_a['bezeichnung_w']#</td>
-            <td>#entry_a['von_w']#</td>
-            <td>#entry_a['bis_w']#</td>
-            <td>#entry_a['beschreibung_w']#</td>
-            <td>#entry_a['maxteilnehmer_w']#</td>
-            <td>#entry_a['minteilnehmer_w']#</td>
+            <td>#entry_a[0]#</td>
+            <td>#entry_a[1]#</td>
+            <td>#entry_a[2]#</td>
+            <td>#entry_a[3]#</td>
+            <td>#entry_a[4]#</td>
+            <td>#entry_a[5]#</td>
         </tr>
-    @endif@
-    @endfor@
+
+
     </table>
 
 <hr>
@@ -42,18 +42,18 @@
             <th>akademische Grade</th>
             <th>Tätigkeit</th>
         </tr>
-    @var entry_a;@
+    @var entry_a = context[8];@
     @var loop_i;@
-    @for loop_i in context@
-        @entry_a = context[loop_i];@
-        @if entry_a['id_m'] != null@
+    @for loop_i in entry_a@
+        @entry_b = entry_a[loop_i];@
+            @if entry_b[4] == "erfolgreich"@
             <tr>
-                <td>#entry_a['name']#</td>
-                <td>#entry_a['vorname']#</td>
-            	<td>#entry_a['akagrad']#</td>
-            	<td>#entry_a['taetigkeit']#</td>
+                <td>#entry_b[0]#</td>
+                <td>#entry_b[1]#</td>
+            	<td>#entry_b[2]#</td>
+            	<td>#entry_b[3]#</td>
             </tr>
-        @endif@
+            @endif@
     @endfor@
     </table>
 
