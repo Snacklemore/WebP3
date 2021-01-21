@@ -5,6 +5,7 @@
    <form class="formular" id="idForm">
          <input type="hidden" id="training_id" name="training_id" value="#context['id']#" />
 
+
       <div>
          <label for="title">Bezeichnung</label>
          <input type="string" id="title" name="title" value="#context[0]#" required />
@@ -40,17 +41,17 @@
 
        <div>
          <label for="Cert_Bezeichnung">Bezeichnung</label>
-         <input type="text" id="Cert_Bezeichnung" name="Cert_Bezeichnung" value="#context[5]#" required />
+         <input type="text" id="Cert_Bezeichnung" name="Cert_Bezeichnung" value="#context[6][0]#" required />
       </div>
 
        <div>
          <label for="Cert_Beschreibung">Beschreibung</label>
-         <input type="text" id="Cert_Beschreibung" name="Cert_Beschreibung" value="#context[5]#" required />
+         <input type="text" id="Cert_Beschreibung" name="Cert_Beschreibung" value="#context[6][1]#" required />
       </div>
 
       <div>
          <label for="Cert_Berechtigt">Beschreibung</label>
-         <input type="text" id="Cert_Berechtigt" name="Cert_Berechtigt" value="#context[5]#" required />
+         <input type="text" id="Cert_Berechtigt" name="Cert_Berechtigt" value="#context[6][2]#" required />
       </div>
 
       <hr>

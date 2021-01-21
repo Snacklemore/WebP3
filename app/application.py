@@ -184,9 +184,11 @@ class Pflege_Weiterbildung(Parent):
         var2 = self.database.add_certificate_to_training(var,training)
         return json.dumps(training)
     # Returns true of false as string
-    def PUT(self, training_id, title, date_begin, date_end, description, max_attendees, min_attendees):
-        return json.dumps(str(self.database.edit_training(training_id, [title, date_begin, date_end, description, max_attendees,
-                                                             min_attendees])))
+    def PUT(self, cert_id,training_id, title, date_begin, date_end, description, max_attendees, min_attendees,Cert_Bezeichnung,Cert_Beschreibung, Cert_Berechtigt):
+        var = self.database.edit_training(training_id, [title, date_begin, date_end, description, max_attendees,
+                                                  min_attendees])
+        cert = self.database.edit_certificate(certificate_id=None, changed_certificate=[Cert_Bezeichnung, Cert_Beschreibung, Cert_Berechtigt]);
+        return json.dumps(str(var))
 
     def DELETE(self, training_id):
         return str(self.database.delete_training(training_id))

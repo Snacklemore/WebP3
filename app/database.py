@@ -3,6 +3,7 @@ import codecs
 import os
 import copy
 
+
 class Database:
 
     # Constructor
@@ -14,45 +15,45 @@ class Database:
         self.json_file_path = database_file_path
         # Complete json file
         self.empty_database = \
-        {
-            "Mitarbeiter" :
-                {
-                "Max-ID": "0",
-                "Count": "0",
-                "List":
+            {
+                "Mitarbeiter":
                     {
+                        "Max-ID": "0",
+                        "Count": "0",
+                        "List":
+                            {
 
-                    }
-                },
-            "Weiterbildungen" :
-                {
-                "Max-ID": "0",
-                "Count": "0",
-                "Participation_count": "0",
-                "List":
+                            }
+                    },
+                "Weiterbildungen":
                     {
+                        "Max-ID": "0",
+                        "Count": "0",
+                        "Participation_count": "0",
+                        "List":
+                            {
 
-                    }
-                },
-            "Qualifikation":
-                {
-                "Max-ID": "0",
-                "Count": "0",
-                "List":
+                            }
+                    },
+                "Qualifikation":
                     {
+                        "Max-ID": "0",
+                        "Count": "0",
+                        "List":
+                            {
 
+                            }
+                    },
+                "Zertifikat":
+                    {
+                        "Max-ID": "0",
+                        "Count": "0",
+                        "List":
+                            {
+
+                            }
                     }
-                },
-            "Zertifikat":
-                {
-                    "Max-ID": "0",
-                    "Count": "0",
-                    "List":
-                        {
-
-                        }
-                }
-        }
+            }
         self.main_data = None
         # Entry names for json file entries
         self.employee = employee
@@ -111,7 +112,7 @@ class Database:
             data = data.get("List")
             if data:
                 if entry_id:
-                   data = data.get(entry_id)
+                    data = data.get(entry_id)
 
         # Raise an exception if function fails -> easier to filter out errors in calling functions
         if data is None:
@@ -166,6 +167,7 @@ class Database:
 
         except (KeyError, ValueError):
             return None
+
     # Public method to be accessed from outside the class | Notice it returns a value copy not reference
     # Reason -> database should only be changed from methods inside the class
     # relations: If True relations are returned as well | False: no relations are returned
@@ -177,11 +179,11 @@ class Database:
             data = data.get("List")
             if data:
                 if entry_id:
-                   data = data.get(entry_id)
+                    data = data.get(entry_id)
 
         # Raise an exception if function fails -> easier to filter out errors in calling functions
         if data is None:
-            #return None
+            # return None
             raise KeyError("get_list -> data was None in first check(Line 139 Database.py)")
 
         # copy by value
@@ -250,7 +252,8 @@ class Database:
                                 data[employee][4][counter].append(training[1])
 
                             for counter, qualification_id in enumerate(data[employee][5]):
-                                data[employee][5][counter] = self.get_list(self.qualification, entry_id=qualification_id)
+                                data[employee][5][counter] = self.get_list(self.qualification,
+                                                                           entry_id=qualification_id)
 
                             for counter, certificate_id in enumerate(data[employee][6]):
                                 data[employee][6][counter] = self.get_list(self.certificate, entry_id=certificate_id)
@@ -283,7 +286,8 @@ class Database:
                                 data[training][6] = []
 
                             for counter, qualification_id in enumerate(data[training][7]):
-                                data[training][7][counter] = self.get_list(self.qualification, entry_id=qualification_id)
+                                data[training][7][counter] = self.get_list(self.qualification,
+                                                                           entry_id=qualification_id)
 
                             for counter, employee in enumerate(data[training][8]):
                                 data[training][8][counter] = self.get_list(self.employee, entry_id=employee[0])
@@ -307,7 +311,7 @@ class Database:
                     if entry_id is not None:
 
                         for counter, employee_id in enumerate(data[3]):
-                            data[3][counter] =  self.get_list(self.employee, entry_id=employee_id)
+                            data[3][counter] = self.get_list(self.employee, entry_id=employee_id)
                             data[3][counter].append(employee_id)
 
                     else:
@@ -317,7 +321,7 @@ class Database:
                                 data[certificate][3][counter].append(employee_id)
                 else:
                     raise KeyError("dict_name was not a class object(Line 263 Database.py)")
-                    #return None
+                    # return None
 
         # Notice that a copy by value is returned
         return data
@@ -422,6 +426,12 @@ class Database:
     def add_training_to_employee(self, employee_id, training_id, employee_participation_status):
         try:
             employee = self.__get_list(self.employee, entry_id=employee_id)
+
+            # Check if training is already in employee
+            for training in employee[4]:
+                if training_id in training:
+                    raise KeyError
+
             employee[4].append([training_id, employee_participation_status])
 
             training = self.__get_list(self.training, entry_id=training_id)
@@ -455,15 +465,16 @@ class Database:
             employee_list = self.__get_list(self.employee, entry_id=employee_id)
             for training in employee_list[4]:
                 if training_id in training:
-                    if training[1].lower() not in finished_training_states:
-                        has_not_finished_training = True
-                        training[1] = "storniert"
+                    # if training[1].lower() not in finished_training_states:
+                    # has_not_finished_training = True
+                    # training[1] = "storniert"
+                    employee_list[4].remove(training)
 
             # TODO Temporary solution for employee delete -> deletes employee completely from the database instead of setting it to "storniert"
             training_list = self.__get_list(self.training, entry_id=training_id)
             for employee in training_list[-1]:
                 if employee_id in employee:
-                    #employee[-1] = "storniert"
+                    # employee[-1] = "storniert"
                     training_list[-1].remove(employee)
 
             # Subtract 1 from participation count if employee has not finished the training
@@ -522,7 +533,8 @@ class Database:
             self.change_count(self.training, amount=1)
 
             # Append certificate, qualification and employee
-            new_training.append(None) # None because entry is no list -> there can only be one certificate from a training
+            new_training.append(
+                None)  # None because entry is no list -> there can only be one certificate from a training
             new_training.append([])
             new_training.append([])
 
