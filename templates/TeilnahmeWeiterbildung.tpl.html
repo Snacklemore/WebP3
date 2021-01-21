@@ -1,7 +1,11 @@
 <!-- Template -->
 <!-- Contentbereich -->
 <div class="headline">Teilnahme - Weiterbildung</div>
-
+	@var currentDate = new Date();@
+	@var dd = String(currentDate.getDate()).padStart(2, '0');@
+	@var mm = String(currentDate.getMonth()+1).padStart(2, '0');@
+	@var yyyy = currentDate.getFullYear();@
+	@currentDate = yyyy + '-' + mm + '-' + dd;@
 <hr>
 <div class="headline_small">Abgeschlossene/Laufende Weiterbildungen</div>
 <table class="overview">
@@ -12,7 +16,7 @@
 		<th>Beschreibung</th>
 		<th>max. Teilnehmer</th>
 		<th>min. Teilnehmer</th>
-		<th>Status</th>
+
 	</tr>
 
    	@var entry_a;@
@@ -20,19 +24,20 @@
    	@for loop_i in context@
       	@entry_a = context[loop_i];@
 
+			@var begin = entry_a[1];@
+			@var end = entry_a[2];@
+			@if begin <= currentDate@
 
+      			<tr id="#loop_i#">
+					<td>#entry_a[0]#</td>
+        			<td>#entry_a[1]#</td>
+        			<td>#entry_a[2]#</td>
+					<td>#entry_a[3]#</td>
+					<td>#entry_a[4]#</td>
+					<td>#entry_a[5]#</td>
 
-
-      		<tr id="#loop_i#">
-				<td>#entry_a[0]#</td>
-        		<td>#entry_a[1]#</td>
-        		<td>#entry_a[2]#</td>
-				<td>#entry_a[3]#</td>
-				<td>#entry_a[4]#</td>
-				<td>#entry_a[5]#</td>
-				<td>#entry_a[5]#</td>
-      		</tr>
-
+      			</tr>
+			@endif@
    	@endfor@
 </table>
 
@@ -51,16 +56,18 @@
 	@var loop_i;@
 	@for loop_i in context@
 			@entry_a = context[loop_i];@
-
-	   		<tr id="#loop_i#">
-				<td>#entry_a[0]#</td>
-		  		<td>#entry_a[1]#</td>
-		  		<td>#entry_a[2]#</td>
-		  		<td>#entry_a[3]#</td>
-		  		<td>#entry_a[4]#</td>
-		  		<td>#entry_a[5]#</td>
-	   		</tr>
-
+			@var begin = entry_a[1];@
+			@var end = entry_a[2];@
+			@if begin > currentDate@
+	   			<tr id="#loop_i#">
+					<td>#entry_a[0]#</td>
+		  			<td>#entry_a[1]#</td>
+		  			<td>#entry_a[2]#</td>
+		  			<td>#entry_a[3]#</td>
+		  			<td>#entry_a[4]#</td>
+		  			<td>#entry_a[5]#</td>
+	   			</tr>
+	        @endif@
 	@endfor@
  </table>
 
