@@ -182,7 +182,7 @@ class Pflege_Weiterbildung(Parent):
     def POST(self, training_id, title, date_begin, date_end, description, max_attendees, min_attendees,Cert_Bezeichnung,Cert_Beschreibung, Cert_Berechtigt):
         var = self.database.add_certificate([Cert_Bezeichnung,Cert_Beschreibung,Cert_Berechtigt])
         training = self.database.add_training([title, date_begin, date_end, description, max_attendees, min_attendees])
-        var2 = self.database.add_certificate_to_training(var,training);
+        var2 = self.database.add_certificate_to_training(var,training)
         return json.dumps(training)
     # Returns true of false as string
     def PUT(self, training_id, title, date_begin, date_end, description, max_attendees, min_attendees):

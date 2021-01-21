@@ -300,7 +300,7 @@ class FormView_cl{
 
 
          fetch(url, {method: METHOD, body: para, header: {"Content-type": "application/x-www-form-urlencoded"}}).then(res => res.json())
-             .then(response => console.log("SUCCESS!ID=",response,alert("Speichern erfolgreich"), APPUTIL.es_o.publish_px("app.cmd",["input_type", response])))
+             .then(response => console.log("SUCCESS!ID=",response,alert("Speichern erfolgreich"), APPUTIL.es_o.publish_px("app.cmd",[input_type, response])))
              .catch(error => console.error("Error", error));
 
          APPUTIL.es_o.publish_px("app.cmd", ["idSave", null]);
