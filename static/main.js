@@ -8,6 +8,14 @@
 
 'use strict'
 
+//FUCK THIS AND GET DATE IN TEMPLATE
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '-' + dd + '-' + yyyy;
+
 //------------------------------------------------------------------------------
 class DetailView_cl {
 //------------------------------------------------------------------------------
@@ -578,6 +586,7 @@ class Application_cl {
          if (el_o != null) {
             el_o.innerHTML = markup_s;
          }
+         this.DetailView_home.render_px();
          break;
 
       case "app.cmd":
@@ -624,6 +633,13 @@ class Application_cl {
             case "anzeigen_teilnahme_mitarbeiter":
                this.DetailView_teilnahme_mitarbeiter.render_px(data_opl[1], data_opl[2]);
                break;
+                //teilnahme weiterbildung
+            case "teilnahme_weiterbildung":
+               this.listView_teilnahme_weiterbildung.render_px(data_opl[1],)
+               break;
+            case "anzeigen_teilnahme_weiterbildung":
+               this.DetailView_teilnahme_weiterbildung.render_px(data_opl[1], data_opl[2]);
+               break;
             case "addteilnahme":
                var url = "/app/" +"teilnahme" + "/" + data_opl[1] + "/" + data_opl[2];
                fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'} })
@@ -637,13 +653,7 @@ class Application_cl {
 
 
 
-             //teilnahme weiterbildung
-            case "teilnahme_weiterbildung":
-               this.listView_teilnahme_weiterbildung.render_px(data_opl[1])
-               break;
-            case "anzeigen_teilnahme_weiterbildung":
-               this.DetailView_teilnahme_weiterbildung.render_px(data_opl[1], data_opl[2]);
-               break;
+
             //Status
             case "erfolgTeilnahme":
                var url = "/app/" + "teilnahme" + "/" + data_opl[1] + "/" + data_opl[2] + "/" + data_opl[3];   // 1. Mitarbeiter, 2. Weiterbildung, 3. Status

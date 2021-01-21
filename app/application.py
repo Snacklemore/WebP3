@@ -170,7 +170,7 @@ class Pflege_Weiterbildung(Parent):
             training = self.database.get_list(self.database.training, entry_id=training_id, relations=True)
             return json.dumps(training)
         elif training_id is None:
-            training_list = self.database.get_list(self.database.training)
+            training_list = self.database.get_list(self.database.training,relations=True)
             return json.dumps(training_list)
         elif training_id == 'null':
             di = {'0': ["", ""]}
@@ -179,9 +179,11 @@ class Pflege_Weiterbildung(Parent):
 
 
     # Returns new training id as string
-    def POST(self, training_id, title, date_begin, date_end, description, max_attendees, min_attendees):
-        return self.database.add_training([title, date_begin, date_end, description, max_attendees, min_attendees])
-
+    def POST(self, training_id, title, date_begin, date_end, description, max_attendees, min_attendees,Cert_Bezeichnung,Cert_Beschreibung, Cert_Berechtigt):
+        var = self.database.add_certificate([Cert_Bezeichnung,Cert_Beschreibung,Cert_Berechtigt])
+        training = self.database.add_training([title, date_begin, date_end, description, max_attendees, min_attendees])
+        var2 = self.database.add_certificate_to_training(var,training);
+        return json.dumps(training)
     # Returns true of false as string
     def PUT(self, training_id, title, date_begin, date_end, description, max_attendees, min_attendees):
         return json.dumps(str(self.database.edit_training(training_id, [title, date_begin, date_end, description, max_attendees,
@@ -228,7 +230,7 @@ class Teilnahme_cl(Parent):
         pass
 
     # -------------------------------------------------------
-    def GET(self, id=None,wAnzeige=None, teilnahme=None):
+    def GET(self,id=None,wAnzeige=None,  date=None,teilnahme=None):
     # -------------------------------------------------------
         if id and wAnzeige is None:
             employee = self.database.get_list(self.database.employee, entry_id=id, relations=True,
