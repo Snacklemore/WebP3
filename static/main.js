@@ -134,7 +134,7 @@ class DetailView_cl {
 
       }
    handleEvent_p (event_opl) {
-      if (event_opl.target.tagName.toUpperCase() == "TD") { //falls eine Tabellenzeile ausgewählt wurde, setzte eine ID. Auf diese ID können die anderen events zugreifen, um so die ID der Tabellenzeile zu erhalten, z.b. die Mitarbeiter-ID
+      if (event_opl.target.tagName.toUpperCase() == "TD") {
          let elx_o = document.querySelector(".clSelected");
             if (elx_o != null) {
                elx_o.classList.remove("clSelected");
@@ -359,7 +359,6 @@ class ListView_cl {
             elx_o.classList.remove("clSelected");
          }
          event_opl.target.parentNode.classList.add("clSelected");
-         //event_opl.target.classList.add("clSelected");
 
          event_opl.preventDefault();
       }
@@ -570,6 +569,7 @@ class Application_cl {
          if (el_o != null) {
             el_o.innerHTML = markup_s;
          }
+
          let nav_a = [
             ["home", "Startseite"],
             ["mitarbeiter", "Pflege Mitarbeiter"],
@@ -584,6 +584,12 @@ class Application_cl {
          //markup_s = APPUTIL.tm_o.execute_px("home.tpl.html", null);
          el_o = document.querySelector("main");
          if (el_o != null) {
+            el_o.innerHTML = markup_s;
+         }
+         markup_s= APPUTIL.tm_o.execute_px("footer.tpl.html", null);
+         el_o = document.getElementById("footer");
+         if (el_o != null)
+         {
             el_o.innerHTML = markup_s;
          }
          this.DetailView_home.render_px();

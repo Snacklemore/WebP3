@@ -34,15 +34,19 @@ main {
    right: 0;
    bottom: 100px;
 }
-footer {
+.footer {
    position: absolute;
    bottom: 0;
-   left: 0;
-   right: 0;
-   height: 100px;
+   width: 100%;
+   height: 50px;
    background-color: blue;
    color: white;
+   text-align: right;
 }
+table, th, td {
+  border: 1px solid black;
+}
+
 footer p {
    text-align: center;
 }

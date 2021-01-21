@@ -1,5 +1,4 @@
 from .database import Database
-from .view import View_cl
 import cherrypy
 import json
 
@@ -7,7 +6,7 @@ import json
 class Parent:
     # Static Variables
     database = Database("database.json", "Mitarbeiter", "Weiterbildungen", "Qualifikation", "Zertifikat")
-    view_o = View_cl()
+
 
     # Method to merge dictionaries
     # Entries with same key will be overwritten
@@ -193,30 +192,6 @@ class Pflege_Weiterbildung(Parent):
         return str(self.database.delete_training(training_id))
 
 
-@cherrypy.expose
-class Teilnahme_Mitarbeiter(Parent):
-
-    # Returns string dict
-    def GET(self, employee_id=None):
-        if employee_id:
-            employee = self.database.get_list(self.database.employee, entry_id=employee_id, relations=True)
-            return json.dumps(employee)
-
-        else:
-            employee_list = self.database.get_list(self.database.employee)
-            return json.dumps(employee_list)
-
-    # TODO
-    def POST(self):
-        pass
-
-    # TODO
-    def PUT(self):
-        pass
-
-    # TODO
-    def DELETE(self):
-        pass
 
 
 # ----------------------------------------------------------
@@ -305,49 +280,7 @@ class Teilnahme_cl(Parent):
         return
         # -------------------------------------------------------
 
-    def getList_w(self):
-        # -------------------------------------------------------
 
-
-        return
-
-        # -------------------------------------------------------
-
-    def getDetail_mt(self, id_spl):
-        # -------------------------------------------------------
-
-
-        return
-
-        # -------------------------------------------------------
-
-    def getDetail_wt(self, id_spl):
-        # -------------------------------------------------------
-
-
-        return
-
-
-@cherrypy.expose
-class Teilnahme_Weiterbildung(Parent):
-
-    # Returns string dict
-    def GET(self, training_id=None):
-        if training_id:
-            training = self.database.get_list(self.database.training, entry_id=training_id, relations=True)
-            return json.dumps(training)
-
-        else:
-            training_list = self.database.get_list(self.database.training)
-            return json.dumps(training_list)
-
-    # TODO
-    def POST(self):
-        pass
-
-    # TODO
-    def PUT(self):
-        pass
 
 
 @cherrypy.expose
